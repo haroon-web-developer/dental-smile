@@ -1,0 +1,6 @@
+{
+  "name": "Dental Smile",
+  "description": "Official website for Dental Smile featuring appointment booking, WhatsApp scheduling, verified patient reviews, cosmetic smile design, and modern gentle dental services.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
