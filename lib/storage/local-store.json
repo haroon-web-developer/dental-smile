@@ -1,0 +1,348 @@
+{
+  "appointments": [
+    {
+      "id": "apt-seed-1",
+      "name": "Muhammad Usman",
+      "phone": "03001234567",
+      "whatsapp": "03001234567",
+      "email": "usman.patient@example.com",
+      "service": "Root Canal Treatment",
+      "preferred_date": "2026-09-02",
+      "preferred_time": "04:00 PM",
+      "message": "Experiencing tooth pain on the upper left side for 2 days.",
+      "status": "completed",
+      "created_at": "2026-08-31T13:31:00.291Z",
+      "updated_at": "2026-09-02T04:22:06.998Z"
+    },
+    {
+      "id": "apt-seed-2",
+      "name": "Fatima Noor",
+      "phone": "03339876543",
+      "whatsapp": "03339876543",
+      "email": "fatima.n@example.com",
+      "service": "Teeth Whitening",
+      "preferred_date": "2026-09-03",
+      "preferred_time": "06:30 PM",
+      "message": "Consultation for wedding teeth whitening.",
+      "status": "new",
+      "created_at": "2026-09-01T08:31:00.291Z"
+    },
+    {
+      "id": "apt-seed-3",
+      "name": "Kashif Ali",
+      "phone": "03125556677",
+      "whatsapp": "03125556677",
+      "service": "Zirconia Crown",
+      "preferred_date": "2026-09-04",
+      "preferred_time": "05:00 PM",
+      "message": "Need crown replacement consultation.",
+      "status": "pending",
+      "created_at": "2026-09-01T11:31:00.291Z"
+    }
+  ],
+  "services": [
+    {
+      "id": "teeth-whitening",
+      "name": "Teeth Whitening",
+      "slug": "teeth-whitening",
+      "short_description": "Professional in-clinic whitening treatments designed to safely lighten surface stains and brighten your natural smile.",
+      "description": "Our professional teeth whitening service uses tested, enamel-safe formulations under clinical supervision. Whether your teeth have darkened from coffee, tea, smoking, or natural aging, in-clinic whitening offers a controlled, predictable way to brighten your teeth without damaging tooth enamel.",
+      "icon": "Sparkles",
+      "badge": "Same-Day Brightness",
+      "image": "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Discoloration from coffee, tea, smoking, or dietary stains",
+        "Age-related darkening of natural teeth",
+        "Preparation for special events or smile refreshment"
+      ],
+      "procedure_overview": [
+        "Comprehensive dental examination to verify oral health",
+        "Gentle isolation of gums and soft tissues",
+        "Application of dental-grade whitening gel under clinical oversight",
+        "Post-treatment care guidelines to preserve your brighter shade"
+      ],
+      "benefits": [
+        "Administered under direct dental supervision",
+        "Customized application tailored to your tooth sensitivity",
+        "Noticeable improvement in natural shade"
+      ]
+    },
+    {
+      "id": "root-canal-treatment",
+      "name": "Root Canal Treatment",
+      "slug": "root-canal-treatment",
+      "short_description": "Gentle endodontic treatment to relieve tooth pain, remove deep infection, and save your natural tooth.",
+      "description": "When tooth decay reaches the inner dental pulp or an injury causes infection inside the tooth, root canal treatment is the standard procedure to relieve discomfort and save the natural tooth from extraction. The infected tissue is carefully removed, the canals are cleaned and disinfected, and then sealed with biocompatible material.",
+      "icon": "ShieldAlert",
+      "badge": "Immediate Pain Relief",
+      "image": "https://images.unsplash.com/photo-1629909615184-74f495363b67?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Severe or persistent toothache, especially when chewing",
+        "Prolonged sensitivity to hot or cold temperatures",
+        "Swelling or tenderness in the nearby gums",
+        "Darkening or discoloration of an injured tooth"
+      ],
+      "procedure_overview": [
+        "Local anesthesia to ensure patient comfort throughout",
+        "Precise opening to access and gently clear infected pulp tissue",
+        "Thorough disinfection and shaping of root canals",
+        "Sealing with gutta-percha followed by permanent restoration or crown recommendation"
+      ],
+      "benefits": [
+        "Relieves pain caused by infected nerve tissue",
+        "Preserves natural tooth structure and chewing function",
+        "Prevents infection from spreading to adjacent teeth and bone"
+      ]
+    },
+    {
+      "id": "tooth-extraction",
+      "name": "Tooth Extraction",
+      "slug": "tooth-extraction",
+      "short_description": "Safe and careful extraction of damaged, severely decayed, or impacted teeth with a focus on patient comfort.",
+      "description": "While saving natural teeth is always our priority, severe decay, extensive fracture, advanced periodontal condition, or problematic wisdom teeth may make an extraction the healthiest option. We prioritize gentle technique, complete local anesthesia, and clear aftercare guidance.",
+      "icon": "Activity",
+      "badge": "Gentle Technique",
+      "image": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Severely broken or decayed teeth beyond repair",
+        "Impacted or misaligned wisdom teeth causing pain",
+        "Severe gum disease with loose teeth",
+        "Orthodontic requirements to relieve overcrowding"
+      ],
+      "procedure_overview": [
+        "Detailed clinical evaluation and local anesthesia administration",
+        "Gentle luxation and removal with minimal disruption to surrounding bone",
+        "Hemostasis management and sterile gauze placement",
+        "Step-by-step written and verbal aftercare instructions"
+      ],
+      "benefits": [
+        "Eliminates active sources of dental pain and recurrent infection",
+        "Relieves pressure caused by crowded or impacted teeth",
+        "Prepares your jaw for dental implants or restorative options"
+      ]
+    },
+    {
+      "id": "tooth-filling",
+      "name": "Tooth Filling",
+      "slug": "tooth-filling",
+      "short_description": "Tooth-colored composite restorations that treat cavities, repair minor chips, and blend with your natural teeth.",
+      "description": "Dental composite fillings restore teeth damaged by minor to moderate cavities, wear, or minor chipping. Using modern composite resins that match the natural shade of your enamel, fillings stop the progression of decay while restoring full chewing function and aesthetics.",
+      "icon": "Layers",
+      "badge": "Invisible & Natural",
+      "image": "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Cavities and early-to-moderate dental decay",
+        "Chipped, cracked, or worn tooth edges",
+        "Replacing old or defective amalgam fillings",
+        "Closing small gaps or fixing minor irregularities"
+      ],
+      "procedure_overview": [
+        "Removal of decayed tooth structure and thorough cleansing",
+        "Application of dental adhesive and bonding agent",
+        "Layering of shade-matched composite resin",
+        "Light-curing and precision polishing to match natural bite"
+      ],
+      "benefits": [
+        "Shade-matched to look completely natural",
+        "Bonds directly to tooth structure for durable support",
+        "Protects tooth against future bacterial infiltration"
+      ]
+    },
+    {
+      "id": "zirconia-crown",
+      "name": "Zirconia Crown",
+      "slug": "zirconia-crown",
+      "short_description": "High-strength, metal-free aesthetic crowns known for exceptional durability, biocompatibility, and natural translucency.",
+      "description": "Zirconia crowns represent modern restorative dentistry at its finest. Made from solid or layered zirconium dioxide, they provide exceptional fracture resistance and a translucent, natural appearance with no dark metal margins. Ideal for both front and back teeth where strength and aesthetics are needed.",
+      "icon": "Crown",
+      "badge": "Premium Aesthetics",
+      "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Heavily restored or root canal-treated teeth needing protection",
+        "Cracked, fractured, or severely worn teeth",
+        "Patients seeking metal-free aesthetic restorations",
+        "High-stress posterior teeth requiring maximum durability"
+      ],
+      "procedure_overview": [
+        "Tooth preparation and shaping with precise margins",
+        "Accurate dental impressions or digital scanning",
+        "Placement of temporary crown while custom zirconia crown is fabricated",
+        "Final try-in, bite verification, and permanent cementation"
+      ],
+      "benefits": [
+        "Extremely strong and resistant to chipping or cracking",
+        "Biocompatible with zero dark metal lines at the gumline",
+        "Natural light transmission mimicking real tooth enamel"
+      ]
+    },
+    {
+      "id": "pfm-crown",
+      "name": "PFM Crown (Porcelain-Fused-to-Metal)",
+      "slug": "pfm-crown",
+      "short_description": "Time-tested crowns combining a strong cast-metal substructure with a natural-looking porcelain exterior.",
+      "description": "Porcelain-Fused-to-Metal (PFM) crowns have served as a reliable dental standard for decades. They feature a robust metal coping inside for structural integrity, overlaid with aesthetic dental porcelain. PFM crowns are commonly selected for posterior molars and bridges where bite forces are high.",
+      "icon": "Shield",
+      "badge": "Proven Durability",
+      "image": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Posterior teeth undergoing substantial masticatory pressure",
+        "Support crowns for dental bridges",
+        "Restoration of weakened teeth post root canal therapy",
+        "Proven and cost-effective restorative option"
+      ],
+      "procedure_overview": [
+        "Tooth preparation under local anesthesia",
+        "Precision dental impressions sent to specialized dental laboratory",
+        "Custom fitting and shade matching with surrounding teeth",
+        "Permanent clinical cementation and occlusion adjustment"
+      ],
+      "benefits": [
+        "Decades of proven clinical track record and durability",
+        "High mechanical strength from internal metal framework",
+        "Aesthetic tooth-colored outer porcelain finish"
+      ]
+    },
+    {
+      "id": "dental-implant",
+      "name": "Dental Implant",
+      "slug": "dental-implant",
+      "short_description": "Long-term titanium root replacements designed to restore missing teeth with natural stability and function.",
+      "description": "Dental implants are the gold standard for replacing missing teeth. A biocompatible titanium post is placed into the jawbone where it integrates naturally with the bone structure, serving as a permanent root anchor for a custom crown, bridge, or denture without needing to file down adjacent teeth.",
+      "icon": "Anchor",
+      "badge": "Permanent Solution",
+      "image": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "One or more missing natural teeth",
+        "Difficulty chewing or speaking due to tooth loss",
+        "Desire to avoid removable dentures or adjacent tooth reduction for bridges",
+        "Preserving facial structure and jawbone density"
+      ],
+      "procedure_overview": [
+        "Comprehensive clinical and radiographic bone assessment",
+        "Precise surgical placement of the titanium implant post",
+        "Osseointegration healing period for secure bone bonding",
+        "Attachment of abutment and custom-crafted dental crown"
+      ],
+      "benefits": [
+        "Feels, looks, and functions like a natural tooth",
+        "Preserves neighboring natural teeth without cutting them",
+        "Stimulates and maintains healthy jawbone density"
+      ]
+    },
+    {
+      "id": "braces",
+      "name": "Braces (Orthodontics)",
+      "slug": "braces",
+      "short_description": "Orthodontic treatments to correct misaligned teeth, crowded smiles, and bite irregularities for teens and adults.",
+      "description": "Orthodontic braces gradually guide teeth into proper alignment using gentle, controlled pressure over time. Beyond enhancing smile aesthetics, correcting misalignments improves chewing efficiency, simplifies daily brushing and flossing, and prevents uneven tooth wear.",
+      "icon": "Smile",
+      "badge": "Straight Teeth",
+      "image": "https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=800&q=80",
+      "active": true,
+      "indications": [
+        "Crooked, overlapping, or crowded teeth",
+        "Gaps and spaces between teeth",
+        "Overbite, underbite, crossbite, or open bite",
+        "Jaw alignment and chewing discomfort"
+      ],
+      "procedure_overview": [
+        "Orthodontic consultation, photos, and dental study models",
+        "Placement of precision brackets and archwires",
+        "Regular periodic adjustments to maintain guided tooth movement",
+        "Post-treatment retention plan to keep teeth in their ideal positions"
+      ],
+      "benefits": [
+        "Proper alignment facilitates effective oral hygiene",
+        "Corrects bite balance and reduces abnormal enamel wear",
+        "Creates a harmonious, confident smile"
+      ]
+    }
+  ],
+  "settings": {
+    "id": "default-settings",
+    "clinic_name": "Dental Smile",
+    "phone": "0318 5446951",
+    "whatsapp": "923185446951",
+    "address": "Executive Arcade, Main Boulevard, Islamabad, Pakistan",
+    "opening_hours": "Open until 10:00 PM",
+    "hero_title": "Confident Smiles Start With Better Dental Care",
+    "hero_description": "Providing dedicated, professional dental care in Islamabad. From routine check-ups and restorative fillings to crowns, implants, and orthodontic braces, our clinic focuses on gentle treatment and patient comfort.",
+    "google_rating": 4.9,
+    "google_review_count": 174,
+    "google_maps_url": "https://maps.google.com/?q=Dental+Smile+Executive+Arcade+Islamabad+Pakistan",
+    "google_maps_embed_url": "https://maps.google.com/maps?q=Executive+Arcade+Islamabad+Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "updated_at": "2026-09-01T13:30:59.825Z"
+  },
+  "faqs": [
+    {
+      "id": "faq-1",
+      "question": "How do I book a dental appointment at Dental Smile?",
+      "answer": "You can easily request an appointment online through our booking form on this website, call us directly at 0318 5446951, or send us a message on WhatsApp. We will confirm your preferred date and time promptly.",
+      "category": "Appointments",
+      "active": true
+    },
+    {
+      "id": "faq-2",
+      "question": "Where is Dental Smile located?",
+      "answer": "We are located at Executive Arcade, Main Boulevard, Islamabad, Pakistan. Dedicated parking and accessible ground-floor entry are available.",
+      "category": "Location",
+      "active": true
+    },
+    {
+      "id": "faq-3",
+      "question": "What are the clinic opening hours?",
+      "answer": "Dental Smile is open until 10:00 PM. For specific scheduling or evening appointments, please contact us via phone or WhatsApp at 0318 5446951.",
+      "category": "General",
+      "active": true
+    },
+    {
+      "id": "faq-4",
+      "question": "What dental services are available at Dental Smile?",
+      "answer": "Our services include Teeth Whitening, Root Canal Treatment, Tooth Extraction, Tooth Filling, Zirconia Crowns, PFM Crowns, Dental Implants, and Orthodontic Braces.",
+      "category": "Services",
+      "active": true
+    },
+    {
+      "id": "faq-5",
+      "question": "Does the clinic provide root canal treatment?",
+      "answer": "Yes. We provide root canal treatments designed to relieve tooth pain, treat deep dental infections, and save your natural tooth with gentle care and local anesthesia.",
+      "category": "Services",
+      "active": true
+    },
+    {
+      "id": "faq-6",
+      "question": "Does the clinic offer dental implants?",
+      "answer": "Yes. We offer dental implants as a permanent, durable replacement for missing teeth, restoring both natural biting function and aesthetics.",
+      "category": "Services",
+      "active": true
+    },
+    {
+      "id": "faq-7",
+      "question": "Does the clinic provide braces and orthodontic care?",
+      "answer": "Yes. We provide orthodontic braces for teeth alignment, fixing crowded or spaced teeth, and correcting bite irregularities for both adolescents and adults.",
+      "category": "Services",
+      "active": true
+    },
+    {
+      "id": "faq-8",
+      "question": "Does the clinic offer teeth whitening?",
+      "answer": "Yes. We provide professional in-clinic teeth whitening under dental supervision to safely brighten your teeth and reduce surface stains.",
+      "category": "Services",
+      "active": true
+    },
+    {
+      "id": "faq-9",
+      "question": "How can I reach the clinic quickly on WhatsApp?",
+      "answer": "You can click any of the WhatsApp buttons on our website or message directly at +92 318 5446951 for fast appointment inquiries and clinic directions.",
+      "category": "General",
+      "active": true
+    }
+  ]
+}
