@@ -3,8 +3,8 @@ import { ClinicSettings, ServiceItem, FAQItem, ReviewItem, DoctorProfile, Before
 export const INITIAL_CLINIC_SETTINGS: ClinicSettings = {
   id: 'default-settings',
   clinic_name: 'Dental Smile',
-  phone: '0318 5446951',
-  whatsapp: '923185446951',
+  phone: '0321 4576734',
+  whatsapp: '923214576734',
   address: 'Executive Arcade, Main Boulevard, Islamabad, Pakistan',
   opening_hours: 'Open until 10:00 PM',
   hero_title: 'Confident Smiles Start With Better Dental Care',
@@ -13,6 +13,13 @@ export const INITIAL_CLINIC_SETTINGS: ClinicSettings = {
   google_review_count: 174,
   google_maps_url: 'https://maps.google.com/?q=Dental+Smile+Executive+Arcade+Islamabad+Pakistan',
   google_maps_embed_url: 'https://maps.google.com/maps?q=Executive+Arcade+Islamabad+Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed',
+  maintenance_mode: false,
+  maintenance_title: "Scheduled System Maintenance in Progress",
+  maintenance_message: "Our website is currently undergoing scheduled technical improvements and clinical system updates. We apologize for any temporary inconvenience and look forward to welcoming you back shortly.",
+  maintenance_expected_back: "Returning shortly today",
+  maintenance_contact_phone: "0321 4576734",
+  maintenance_contact_whatsapp: "923214576734",
+  maintenance_secret_key: "dev2026",
   updated_at: new Date().toISOString()
 };
 
@@ -276,7 +283,7 @@ export const INITIAL_FAQS: FAQItem[] = [
   {
     id: 'faq-1',
     question: 'How do I book a dental appointment at Dental Smile?',
-    answer: 'You can easily request an appointment online through our booking form on this website, call us directly at 0318 5446951, or send us a message on WhatsApp. We will confirm your preferred date and time promptly.',
+    answer: 'You can easily request an appointment online through our booking form on this website, call us directly at 0321 4576734, or send us a message on WhatsApp. We will confirm your preferred date and time promptly.',
     category: 'Appointments',
     active: true
   },
@@ -290,7 +297,7 @@ export const INITIAL_FAQS: FAQItem[] = [
   {
     id: 'faq-3',
     question: 'What are the clinic opening hours?',
-    answer: 'Dental Smile is open until 10:00 PM. For specific scheduling or evening appointments, please contact us via phone or WhatsApp at 0318 5446951.',
+    answer: 'Dental Smile is open until 10:00 PM. For specific scheduling or evening appointments, please contact us via phone or WhatsApp at 0321 4576734.',
     category: 'General',
     active: true
   },
@@ -332,7 +339,7 @@ export const INITIAL_FAQS: FAQItem[] = [
   {
     id: 'faq-9',
     question: 'How can I reach the clinic quickly on WhatsApp?',
-    answer: 'You can click any of the WhatsApp buttons on our website or message directly at +92 318 5446951 for fast appointment inquiries and clinic directions.',
+    answer: 'You can click any of the WhatsApp buttons on our website or message directly at +92 321 4576734 for fast appointment inquiries and clinic directions.',
     category: 'General',
     active: true
   }

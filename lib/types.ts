@@ -43,6 +43,13 @@ export interface ClinicSettings {
   google_review_count: number;
   google_maps_url: string;
   google_maps_embed_url: string;
+  maintenance_mode?: boolean;
+  maintenance_title?: string;
+  maintenance_message?: string;
+  maintenance_expected_back?: string;
+  maintenance_contact_phone?: string;
+  maintenance_contact_whatsapp?: string;
+  maintenance_secret_key?: string;
   updated_at?: string;
 }
 

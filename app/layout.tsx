@@ -1,8 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
-import MobileStickyBar from '@/components/layout/MobileStickyBar';
+import MaintenanceWrapper from '@/components/maintenance/MaintenanceWrapper';
 import { getClinicSettings, getServices } from '@/lib/storage/db';
 import { generateDentistSchema } from '@/lib/seo/schema-generator';
 
@@ -105,10 +103,9 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-slate-50 text-slate-900 antialiased flex flex-col font-sans selection:bg-sky-500 selection:text-white pb-14 lg:pb-0">
-        <Header settings={settings} />
-        <main className="flex-1">{children}</main>
-        <Footer settings={settings} services={services} />
-        <MobileStickyBar settings={settings} />
+        <MaintenanceWrapper settings={settings} services={services}>
+          {children}
+        </MaintenanceWrapper>
       </body>
     </html>
   );

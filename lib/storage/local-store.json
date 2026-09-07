@@ -292,7 +292,14 @@
     "google_review_count": 174,
     "google_maps_url": "https://maps.google.com/?q=Dental+Smile+Executive+Arcade+Islamabad+Pakistan",
     "google_maps_embed_url": "https://maps.google.com/maps?q=Executive+Arcade+Islamabad+Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    "updated_at": "2026-09-01T13:30:59.825Z"
+    "maintenance_mode": true,
+    "maintenance_title": "Scheduled System Maintenance in Progress",
+    "maintenance_message": "Our website is currently undergoing scheduled technical improvements and clinical system updates. We apologize for any temporary inconvenience and look forward to welcoming you back shortly.",
+    "maintenance_expected_back": "Returning shortly today",
+    "maintenance_contact_phone": "0321 4576734",
+    "maintenance_contact_whatsapp": "923214576734",
+    "maintenance_secret_key": "dev2026",
+    "updated_at": "2026-09-07T09:09:59.777Z"
   },
   "faqs": [
     {

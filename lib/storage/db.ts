@@ -223,6 +223,8 @@ export async function deleteAppointment(id: string): Promise<boolean> {
 // --------------------- SETTINGS ---------------------
 
 export async function getClinicSettings(): Promise<ClinicSettings> {
+  let settingsData: ClinicSettings = { ...INITIAL_CLINIC_SETTINGS };
+
   if (isServerSupabaseConfigured && supabaseAdmin) {
     try {
       const { data, error } = await supabaseAdmin
@@ -232,15 +234,24 @@ export async function getClinicSettings(): Promise<ClinicSettings> {
         .single();
 
       if (!error && data) {
-        return data as ClinicSettings;
+        settingsData = { ...INITIAL_CLINIC_SETTINGS, ...data };
       }
     } catch (err) {
       console.warn('Supabase settings query error:', err);
     }
+  } else {
+    const store = readLocalStore();
+    if (store.settings) {
+      settingsData = { ...INITIAL_CLINIC_SETTINGS, ...store.settings };
+    }
   }
 
-  const store = readLocalStore();
-  return store.settings || INITIAL_CLINIC_SETTINGS;
+  // Environment variable override if specified by developer
+  if (process.env.MAINTENANCE_MODE === 'true') {
+    settingsData.maintenance_mode = true;
+  }
+
+  return settingsData;
 }
 
 export async function updateClinicSettings(settings: Partial<ClinicSettings>): Promise<ClinicSettings> {

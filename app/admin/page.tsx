@@ -23,7 +23,13 @@ import {
   ExternalLink,
   ChevronRight,
   Plus,
-  RefreshCw
+  RefreshCw,
+  Wrench,
+  Power,
+  Eye,
+  AlertTriangle,
+  KeyRound,
+  ShieldCheck
 } from 'lucide-react';
 import { Appointment, ClinicSettings, ServiceItem, FAQItem } from '@/lib/types';
 import { INITIAL_REVIEWS, INITIAL_CLINIC_SETTINGS, INITIAL_SERVICES, INITIAL_FAQS } from '@/lib/data/initial-data';
@@ -52,6 +58,32 @@ export default function AdminDashboardPage() {
   const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
   const [loadingAction, setLoadingAction] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Toggle Maintenance Mode
+  const handleToggleMaintenance = async (desiredState?: boolean) => {
+    const targetState = desiredState !== undefined ? desiredState : !settings.maintenance_mode;
+    try {
+      setLoadingAction(true);
+      const res = await fetch('/api/maintenance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'toggle', enabled: targetState }),
+      });
+      if (res.ok) {
+        setSettings(prev => ({ ...prev, maintenance_mode: targetState }));
+        setSaveSuccessMsg(
+          targetState
+            ? '🚨 Maintenance Mode ENABLED! Website is now hidden from the public.'
+            : '✅ Maintenance Mode DISABLED! Website is now publicly live.'
+        );
+        setTimeout(() => setSaveSuccessMsg(null), 5000);
+      }
+    } catch (err) {
+      console.error('Error toggling maintenance:', err);
+    } finally {
+      setLoadingAction(false);
+    }
+  };
 
   const loadData = async (isManual = false) => {
     if (isManual) setIsRefreshing(true);
@@ -300,13 +332,43 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Maintenance Mode Quick Toggle Widget */}
+              <div className="flex items-center gap-2 bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-700">
+                <span className="flex h-2 w-2 relative">
+                  {settings?.maintenance_mode ? (
+                    <>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+                    </>
+                  ) : (
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                  )}
+                </span>
+                <span className={`text-[11px] font-bold ${settings?.maintenance_mode ? 'text-amber-400' : 'text-emerald-400'}`}>
+                  {settings?.maintenance_mode ? 'Site Hidden (Maintenance ON)' : 'Site Live (Public)'}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => handleToggleMaintenance()}
+                  disabled={loadingAction}
+                  className={`ml-1 text-[11px] font-bold px-2.5 py-0.5 rounded-lg transition cursor-pointer disabled:opacity-50 ${
+                    settings?.maintenance_mode
+                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-xs'
+                      : 'bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40'
+                  }`}
+                >
+                  {settings?.maintenance_mode ? 'Turn OFF (Go Live)' : 'Hide Website'}
+                </button>
+              </div>
+
               <Link
                 href="/"
                 target="_blank"
                 className="inline-flex items-center gap-1.5 text-xs text-slate-300 hover:text-white bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 transition"
               >
-                <span>View Live Site</span>
+                <span>View Site</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </Link>
 
@@ -325,6 +387,41 @@ export default function AdminDashboardPage() {
 
       {/* Main Admin Workspace */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        {/* Active Maintenance Mode Alert Banner */}
+        {settings?.maintenance_mode && (
+          <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-300 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-amber-900">
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+              <div>
+                <h2 className="font-extrabold text-sm text-amber-950">
+                  Maintenance Mode is Currently ACTIVE
+                </h2>
+                <p className="text-xs text-amber-800 mt-0.5">
+                  The public website is hidden from visitors. Anyone visiting any page will see your customized &quot;Under Maintenance / Working on Site&quot; notice. You can edit this notice in the Clinic Settings tab.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={() => handleToggleMaintenance(false)}
+                disabled={loadingAction}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition cursor-pointer"
+              >
+                <Power className="w-3.5 h-3.5" />
+                <span>Turn OFF (Make Public)</span>
+              </button>
+              <Link
+                href="/"
+                target="_blank"
+                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-amber-300 text-amber-900 font-bold text-xs hover:bg-amber-100/60 transition"
+              >
+                <Eye className="w-3.5 h-3.5" />
+                <span>Preview Site</span>
+              </Link>
+            </div>
+          </div>
+        )}
         {/* KPI Metric Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-8">
           <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
@@ -827,11 +924,174 @@ export default function AdminDashboardPage() {
 
         {/* ----------------- TAB 3: CLINIC SETTINGS ----------------- */}
         {activeTab === 'settings' && settings && (
-          <form onSubmit={handleSaveSettings} className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
-            <div>
-              <h2 className="text-lg font-bold text-slate-900">Clinic Business Information & CMS</h2>
-              <p className="text-xs text-slate-500">Update clinic address, phone numbers, hours, hero copy, and Google review numbers.</p>
+          <form onSubmit={handleSaveSettings} className="space-y-6">
+            
+            {/* DEVELOPER MAINTENANCE MODE SECTION */}
+            <div className={`rounded-2xl p-6 sm:p-8 border transition-all ${
+              settings.maintenance_mode
+                ? 'bg-amber-500/5 border-amber-300 shadow-sm'
+                : 'bg-white border-slate-200 shadow-sm'
+            }`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center">
+                      <Wrench className="w-4 h-4" />
+                    </div>
+                    <h2 className="text-lg font-bold text-slate-900">
+                      Developer Maintenance Mode & Site Hiding
+                    </h2>
+                  </div>
+                  <p className="text-xs text-slate-500 max-w-xl">
+                    Instantly hide the entire website from the public and display a custom &quot;Under Maintenance / Working on Site&quot; page. You as a developer/admin can bypass this screen and preview the website anytime.
+                  </p>
+                </div>
+
+                {/* Primary Maintenance Toggle */}
+                <div className="flex items-center gap-3 self-start sm:self-auto">
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      id="admin-maintenance-mode-toggle"
+                      checked={Boolean(settings.maintenance_mode)}
+                      onChange={(e) => setSettings({ ...settings, maintenance_mode: e.target.checked })}
+                      className="sr-only peer"
+                    />
+                    <div className="w-14 h-7 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-amber-500"></div>
+                  </label>
+                  <span className={`text-xs font-bold uppercase tracking-wider ${
+                    settings.maintenance_mode ? 'text-amber-700' : 'text-slate-500'
+                  }`}>
+                    {settings.maintenance_mode ? 'Maintenance Active' : 'Publicly Live'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Maintenance Settings Inputs */}
+              <div className="pt-6 space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Maintenance Page Headline
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.maintenance_title || ''}
+                      onChange={(e) => setSettings({ ...settings, maintenance_title: e.target.value })}
+                      placeholder="e.g., We're Currently Upgrading Our Clinic Experience"
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                  </div>
+
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Maintenance Notice / Patient Explanation
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={settings.maintenance_message || ''}
+                      onChange={(e) => setSettings({ ...settings, maintenance_message: e.target.value })}
+                      placeholder="Explain the scheduled upgrade or system maintenance to patients..."
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Expected Return / Back Online Time
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.maintenance_expected_back || ''}
+                      onChange={(e) => setSettings({ ...settings, maintenance_expected_back: e.target.value })}
+                      placeholder="e.g., Returning shortly today or Today at 6:00 PM"
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Developer Bypass Passkey
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.maintenance_secret_key || 'dev2026'}
+                      onChange={(e) => setSettings({ ...settings, maintenance_secret_key: e.target.value })}
+                      placeholder="dev2026"
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm font-mono outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                    <span className="text-[11px] text-slate-500 mt-1 block">
+                      Use on maintenance page or append <code className="text-amber-700 font-semibold font-mono">?bypass={settings.maintenance_secret_key || 'dev2026'}</code> to any URL.
+                    </span>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Emergency Dental Phone (Shown during maintenance)
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.maintenance_contact_phone || settings.phone || ''}
+                      onChange={(e) => setSettings({ ...settings, maintenance_contact_phone: e.target.value })}
+                      placeholder="0321 4576734"
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
+                      Emergency Dental WhatsApp (Shown during maintenance)
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.maintenance_contact_whatsapp || settings.whatsapp || ''}
+                      onChange={(e) => setSettings({ ...settings, maintenance_contact_whatsapp: e.target.value })}
+                      placeholder="923214576734"
+                      className="w-full p-2.5 rounded-lg border border-slate-300 text-sm outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 bg-white"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                  <div className="flex items-center gap-2 text-xs text-slate-500">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <span>Admin portal (/admin) and login are never blocked.</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleToggleMaintenance()}
+                      disabled={loadingAction}
+                      className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer disabled:opacity-50 ${
+                        settings.maintenance_mode
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                          : 'bg-amber-600 hover:bg-amber-700 text-white'
+                      }`}
+                    >
+                      <Power className="w-3.5 h-3.5" />
+                      <span>{settings.maintenance_mode ? 'Deactivate (Go Live)' : 'Activate Maintenance Now'}</span>
+                    </button>
+
+                    <Link
+                      href="/"
+                      target="_blank"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold border border-slate-300 transition"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Preview Website</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            {/* GENERAL CLINIC BUSINESS SETTINGS */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+              <div>
+                <h2 className="text-lg font-bold text-slate-900">Clinic Business Information & CMS</h2>
+                <p className="text-xs text-slate-500">Update clinic address, phone numbers, hours, hero copy, and Google review numbers.</p>
+              </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -862,7 +1122,7 @@ export default function AdminDashboardPage() {
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
-                  WhatsApp Number (International format e.g. 923185446951)
+                  WhatsApp Number (International format e.g. 923214576734)
                 </label>
                 <input
                   type="text"
@@ -966,7 +1226,8 @@ export default function AdminDashboardPage() {
                 <span>Save All Settings</span>
               </button>
             </div>
-          </form>
+          </div>
+        </form>
         )}
 
         {/* ----------------- TAB 4: FAQS ----------------- */}
